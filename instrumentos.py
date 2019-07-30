@@ -19,7 +19,7 @@ def recuperarInstrumentoPorId(id):
 		if (instrumento[0]==id):
 			return instrumento
 	fichero.close()
-
+#prueba para ver diferencia
 #Recupera un instrumento por su nombre
 def recuperarInstrumentoPorNombre(nombre):
 	fichero = open(r"db\instrumentos.dat","r")
