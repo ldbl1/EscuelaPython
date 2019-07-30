@@ -44,8 +44,22 @@ def recuperaUsuariosDeUnInstrumento(idInstrumento):
 #CREATES#######################################################################
 #Crea una vinculacion de un usuario a un instrumento
 def crearVinculacionUsuarioConInstrumento(idUsuario,idInstrumento):
-	return 0
-	#TODO
+	#Comprobamos que no exista ya la vinculación
+	fichero_usuarios_instrumentos = open(r"db\usuarios_instrumentos.dat","r")
+	for linea in fichero_usuarios_instrumentos:
+		linea=linea.replace('\n','')
+		instrumento_usuario = linea.split(";")
+		if (instrumento_usuario[0] == idUsuario and instrumento_usuario[1] == idInstrumento):
+			return 0
+	fichero_usuarios_instrumentos.close()
+
+	fichero = open(r"db\usuarios_instrumentos.dat","a")
+	cadena = montarUsuario_Instrumentos(idUsuario,idInstrumento)
+	print("La cadena a escribir")
+	print(cadena)
+	fichero.write(cadena)
+	fichero.close()
+	return 1
 
 #UPDATES#######################################################################
 #Se desestima de momento
@@ -53,8 +67,18 @@ def crearVinculacionUsuarioConInstrumento(idUsuario,idInstrumento):
 #DELETES#######################################################################
 #Elimina la vinculacion de un usuario a un instrumento
 def eliminarUnInstrumentoDeUnUsuario(idInstrumento,idUsuario):
-	return 0
-	#TODO
+	#Comprobamos que exista ya la vinculación
+	fichero_usuarios_instrumentos = open(r"db\usuarios_instrumentos.dat","r")
+	cadena = ""
+	for linea in fichero_usuarios_instrumentos:
+		linea=linea.replace('\n','')
+		usuario_instrumento = linea.split(";")
+		if not (usuario_instrumento[0] != idUsuario and usuario_instrumento[1] != idInstrumento):
+			cadena = cadena + montarUsuario_Instrumentos(usuario_instrumento[0],usuario_instrumento[1])
+	fichero_usuarios_instrumentos.close()
+	fichero = open(r"db\usuarios_instrumentos.dat","w")
+	fichero.write(cadena)
+	fichero.close()
 
 #Elimina todos los instrumentos de un usuario
 def eliminarTodosLosInstrumentosDeUnUsuario(idUsuario):
@@ -65,3 +89,15 @@ def eliminarTodosLosInstrumentosDeUnUsuario(idUsuario):
 def eliminarTodosLosUsuariosDeUnInstrumento(idInstrumento):
 	return 0
 	#TODO
+
+#UTILES########################################################################
+def montarUsuario_Instrumentos(idUsuario,idInstrumento):
+	cadena = idUsuario + ";" + idInstrumento + "\n"
+	return cadena
+
+def testtrutru(a,b):
+
+	if a and b:
+		print("OK")
+	else:
+		print("KO")

@@ -94,13 +94,5 @@ def proximoID():
 	
 #Monta la cadena necesaria para buscar, eliminar o crear un usuario
 def montarUsuario(id,nombre,apellido1,apellido2,fechaNacimiento):
-	cadena = id + ";"
-	cadena = cadena + nombre
-	cadena = cadena + ";"
-	cadena = cadena + apellido1
-	cadena = cadena + ";"
-	cadena = cadena + apellido2
-	cadena = cadena + ";"
-	cadena = cadena + fechaNacimiento
-	cadena = cadena + "\n"
+	cadena = id + ";" + nombre + ";" + apellido1 + ";" + apellido2 + ";" + fechaNacimiento + "\n"
 	return cadena
