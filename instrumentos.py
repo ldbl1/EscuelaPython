@@ -19,7 +19,7 @@ def recuperarInstrumentoPorId(id):
 		if (instrumento[0]==id):
 			return instrumento
 	fichero.close()
-#prueba para ver diferencia
+
 #Recupera un instrumento por su nombre
 def recuperarInstrumentoPorNombre(nombre):
 	fichero = open(r"db\instrumentos.dat","r")
@@ -66,9 +66,7 @@ def eliminarInstrumentoPorID(id):
 #UTILES########################################################################
 #Monta la cadena necesaria para buscar, eliminar o crear un instrumento
 def montarInstrumento(id,nombre):
-	cadena = id + ";"
-	cadena = cadena + nombre
-	cadena = cadena + "\n"
+	cadena = id + ";" + nombre + "\n"
 	return cadena
 
 #Devuelve el próximo id del fichero de usuarios
